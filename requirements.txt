@@ -1,6 +1,7 @@
 fastapi
 uvicorn
-joblib
+gunicorn
 opencv-python-headless
 dlib
 numpy
+joblib

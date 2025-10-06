@@ -70,9 +70,10 @@ def process_image_for_prediction(image):
 
     return predicted_shape, skin_tone
 
+# --- Routes ---
 @app.get("/ping")
 async def ping():
-    return {"status": "ok", "message": "Server is running on Vercel!"}
+    return {"status": "ok", "message": "Server is running!"}
 
 @app.post("/api/vision/face-shape")
 async def detect_face_shape(image: UploadFile = File(...)):
@@ -89,7 +90,15 @@ async def detect_face_shape(image: UploadFile = File(...)):
 
         shape, tone = process_image_for_prediction(frame)
 
-        return {"face_shape": shape, "skin_tone": tone}
+        return {
+            "face_shape": shape,
+            "skin_tone": tone
+        }
 
     except Exception as e:
         return JSONResponse({"error": str(e)}, status_code=500)
+
+# --- Run locally ---
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
