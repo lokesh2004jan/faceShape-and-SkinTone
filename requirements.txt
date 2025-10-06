@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+joblib
+opencv-python-headless
+dlib
+numpy
